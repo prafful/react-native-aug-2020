@@ -1,33 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
-export default class App extends React.Component {
+
+export default function App(){
   
-  render(){
+
+
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.textstyle}>React Native! <Text>Style Inheritance </Text></Text>
-      <Text>React Native is easy.Open up App.js to start working on your app!</Text>
-      <Text>I can deploy for multiple devices!!!!</Text>
-      <Text>Tunnel Works!!!!</Text>
-      <StatusBar style="auto" />
+    <View style={mystyles.maincontainer}>
+      <View style={mystyles.header}>
+        <Text style={mystyles.textformat}>React Native</Text>
+      </View>
+      <View style={mystyles.content}>
+        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
+        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
+        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
+        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
+      </View>
     </View>
-  );
-}
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const mystyles = StyleSheet.create({
+  maincontainer:{
     backgroundColor:'pink',
-    color:'blue'
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
   },
-  textstyle:{
-    color:'red',
-    fontSize:22
+  header:{
+    backgroundColor:'lightgrey',
+    padding:20,
+    width:240,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  textformat:{
+    color:'blue'
+    
+  },
+  content:{
+    backgroundColor:'coral',
+    padding:20
   }
-});
+
+})
