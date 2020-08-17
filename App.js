@@ -1,21 +1,22 @@
 
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text, TextInput } from 'react-native';
 
 
 export default function App(){
 // [stateName, function-Who-Will-Change-This-State] = useState('intialValue')
- const [friendName, setFriendName]   = useState('OBB')
+ const [friendName, setFriendName]   = useState('Add Friend')
  const [friendDetail, setFriendDetail] = useState({
                                                     location:'Chennai',
                                                     years: 4                 
                                                   })
-  
-  const changeName =()=>{
-    setFriendName('CAS')
+
+
+  const captureFriendLocation=(value)=>{
+    console.log(value);
     setFriendDetail({
-                       location:'Japan',
-                       years:12
+                      location: value,
+                      years: friendDetail.years
                     })
   }
 
@@ -26,10 +27,26 @@ export default function App(){
         <Text style={mystyles.textformat}>{friendName}</Text>
       </View>
       <View style={mystyles.content}>
-        <Text>Location: {friendDetail.location}</Text>
-        <Text>Location: {friendDetail.years}</Text>
+        <TextInput 
+              style={mystyles.inputfriend} 
+              placeholder='friend location...'
+              onChangeText={captureFriendLocation}>
+        </TextInput>
+        <TextInput 
+              style={mystyles.inputfriend} 
+              keyboardType='numeric'
+              placeholder='friend since years...'
+              onChangeText={(value)=>{setFriendDetail({
+                                                        location:friendDetail.location,
+                                                        years: value
+                                                      })}}>
+        </TextInput>
+        <TextInput style={mystyles.inputfriend} placeholder='about friend...' multiline></TextInput>
         <Text></Text>
-        <Button title="Update State" onPress={changeName} />
+        <Text>Location: {friendDetail.location}</Text>
+        <Text>Years: {friendDetail.years}</Text>
+
+        
       </View>
     </View>
   )
@@ -56,6 +73,13 @@ const mystyles = StyleSheet.create({
   content:{
     backgroundColor:'coral',
     padding:20
+  },
+  inputfriend:{
+    borderWidth:1,
+    borderColor:'pink',
+    padding:8,
+    margin:8,
+    width:184
   }
 
 })
