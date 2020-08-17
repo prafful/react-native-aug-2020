@@ -1,23 +1,35 @@
 
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, Button } from 'react-native';
 
 
 export default function App(){
+// [stateName, function-Who-Will-Change-This-State] = useState('intialValue')
+ const [friendName, setFriendName]   = useState('OBB')
+ const [friendDetail, setFriendDetail] = useState({
+                                                    location:'Chennai',
+                                                    years: 4                 
+                                                  })
   
-
+  const changeName =()=>{
+    setFriendName('CAS')
+    setFriendDetail({
+                       location:'Japan',
+                       years:12
+                    })
+  }
 
   
   return (
     <View style={mystyles.maincontainer}>
       <View style={mystyles.header}>
-        <Text style={mystyles.textformat}>React Native</Text>
+        <Text style={mystyles.textformat}>{friendName}</Text>
       </View>
       <View style={mystyles.content}>
-        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
-        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
-        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
-        <Text>Lorem Ispsum lodor dormot ikea meth!</Text>
+        <Text>Location: {friendDetail.location}</Text>
+        <Text>Location: {friendDetail.years}</Text>
+        <Text></Text>
+        <Button title="Update State" onPress={changeName} />
       </View>
     </View>
   )
