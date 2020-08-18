@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 
 
 export default function App(){
@@ -8,63 +8,105 @@ export default function App(){
  const [friends, setFriends]   = useState([
                                             {
                                               name:'OBB',
-                                              key:1,
-                                              location:'Chennai'
+                                              key:'1',
+                                              location:'Chennai',
+                                              myid: '1'
                                             },
                                             {
                                               name:'CAS',
-                                              key:2,
-                                              location:'Bengaluru'
+                                              key:'2',
+                                              location:'Bengaluru',
+                                              myid: '2'
                                             },
                                             {
                                               name:'OWIOH',
-                                              key:3,
-                                              location:'Japan'
+                                              key:'3',
+                                              location:'Japan',
+                                              myid: '3'
                                             },
                                             {
                                               name:'BNP',
-                                              key:4,
-                                              location:'Ahmedabad'
+                                              key:'4',
+                                              location:'Ahmedabad',
+                                              myid: '4'
                                             },
                                             {
                                               name:'OBB',
-                                              key:5,
-                                              location:'Chennai'
+                                              key:'5',
+                                              location:'Chennai',
+                                              myid: '5'
                                             },
                                             {
                                             name:'CAS',
-                                            key:6,
-                                            location:'Bengaluru'
+                                            key:'6',
+                                            location:'Bengaluru',
+                                            myid: '6'
                                           },
                                           {
                                             name:'OWIOH',
-                                            key:7,
-                                            location:'Japan'
+                                            key:'7',
+                                            location:'Japan',
+                                            myid: '7'
                                           },
                                           {
                                             name:'BNP',
-                                            key:8,
-                                            location:'Ahmedabad'
-                                          }
+                                            key:'8',
+                                            location:'Ahmedabad',
+                                            myid: '8'
+                                          },
+                                          {
+                                            name:'OBB',
+                                            key:'9',
+                                            location:'Chennai',
+                                            myid: '9'
+                                          },
+                                          {
+                                            name:'CAS',
+                                            key:'10',
+                                            location:'Bengaluru',
+                                            myid: '10'
+                                          },
+                                          {
+                                            name:'OWIOH',
+                                            key:'11',
+                                            location:'Japan',
+                                            myid: '11'
+                                          },
+                                          {
+                                            name:'BNPP',
+                                            key:'12',
+                                            location:'Ahmedabad',
+                                            myid: '12'
+                                          },
                                       ])
  
 
-  
+  const listItemPressed = (id) =>{
+    console.log(id);
+    setFriends((prevFriends)=>{
+      console.log(prevFriends)
+      //One with myid == id will be removed from friends state
+      let newFriends = prevFriends.filter(friend => friend.myid != id)
+      return newFriends
+    })
+
+  }
+
   return (
     <View style={mystyles.maincontainer}>
-      <ScrollView>
-        {
-          friends.map(friend =>{
+     <FlatList 
+          //numColumns={2}
+          keyExtractor={item => item.myid}
+          data={friends}
+          renderItem={(f)=>{
+            console.log(f);
             return (
-              <View key={friend.key}>
-                <TouchableOpacity onPress={()=>{console.log(friend.name)}}>
-                  <Text style={mystyles.listitem}>{friend.name}</Text>
-                </TouchableOpacity>
-              </View>
+                    <TouchableOpacity onPress={()=>{listItemPressed(f.item.myid)}}>
+                      <Text style={mystyles.listitem}>{f.item.myid}.{f.item.name}</Text>
+                    </TouchableOpacity>
             )
-          })
-        }
-      </ScrollView>    
+          }}
+     />
         
     </View>
   )
@@ -82,5 +124,6 @@ const mystyles = StyleSheet.create({
     fontSize:65,
     backgroundColor:'goldenrod',
     padding:20,
+    color:'purple'
   }
 })
