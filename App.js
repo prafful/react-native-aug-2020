@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
+import Header from './components/header';
+import AddFriend from './components/addfriend';
 
 
 export default function App(){
@@ -17,67 +19,8 @@ export default function App(){
                                               key:'2',
                                               location:'Bengaluru',
                                               myid: '2'
-                                            },
-                                            {
-                                              name:'OWIOH',
-                                              key:'3',
-                                              location:'Japan',
-                                              myid: '3'
-                                            },
-                                            {
-                                              name:'BNP',
-                                              key:'4',
-                                              location:'Ahmedabad',
-                                              myid: '4'
-                                            },
-                                            {
-                                              name:'OBB',
-                                              key:'5',
-                                              location:'Chennai',
-                                              myid: '5'
-                                            },
-                                            {
-                                            name:'CAS',
-                                            key:'6',
-                                            location:'Bengaluru',
-                                            myid: '6'
-                                          },
-                                          {
-                                            name:'OWIOH',
-                                            key:'7',
-                                            location:'Japan',
-                                            myid: '7'
-                                          },
-                                          {
-                                            name:'BNP',
-                                            key:'8',
-                                            location:'Ahmedabad',
-                                            myid: '8'
-                                          },
-                                          {
-                                            name:'OBB',
-                                            key:'9',
-                                            location:'Chennai',
-                                            myid: '9'
-                                          },
-                                          {
-                                            name:'CAS',
-                                            key:'10',
-                                            location:'Bengaluru',
-                                            myid: '10'
-                                          },
-                                          {
-                                            name:'OWIOH',
-                                            key:'11',
-                                            location:'Japan',
-                                            myid: '11'
-                                          },
-                                          {
-                                            name:'BNPP',
-                                            key:'12',
-                                            location:'Ahmedabad',
-                                            myid: '12'
-                                          },
+                                            }
+                              
                                       ])
  
 
@@ -89,16 +32,26 @@ export default function App(){
       let newFriends = prevFriends.filter(friend => friend.myid != id)
       return newFriends
     })
+  }
 
+  const addFriend =(name)=>{
+    console.log('addFriend function in App Component ' + name);
+    setFriends(prevFriends=>{
+      let tempKey = prevFriends.length + 1
+      return [{name, location:'Chennai', key:tempKey.toString(), myid:tempKey.toString()}, ...prevFriends]
+    })
   }
 
   return (
     <View style={mystyles.maincontainer}>
-     <FlatList 
+      <Header></Header>
+     <AddFriend addFriend={addFriend}></AddFriend>
+      <FlatList 
           //numColumns={2}
           keyExtractor={item => item.myid}
           data={friends}
           renderItem={(f)=>{
+            console.log('Value of friends:');
             console.log(f);
             return (
                     <TouchableOpacity onPress={()=>{listItemPressed(f.item.myid)}}>
